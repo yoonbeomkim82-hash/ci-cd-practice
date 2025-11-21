@@ -1,9 +1,15 @@
 pipeline {
-    agent any // Jenkins Agent를 사용합니다.
+    agent {
+        docker {
+            image 'node:20-alpine' // 🚨 Node.js 런타임이 있는 이미지를 빌드 환경으로 사용
+            args '-u root' // Docker socket 권한 문제 방지 (필요 시 추가)
+        }
+
+    }
 
     // 🚨 환경 변수 설정: 반드시 본인의 ID로 변경하세요!
     environment {
-        DOCKER_ID = 'randy857' 
+        DOCKER_ID = 'your-dockerhub-id' 
         IMAGE_NAME = 'my-ci-cd-app'
         K8S_DEPLOYMENT_FILE = 'k8s-deployment.yaml'
     }

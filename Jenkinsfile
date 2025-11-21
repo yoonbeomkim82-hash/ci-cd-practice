@@ -2,7 +2,7 @@ pipeline {
     agent {
         docker {
             image 'node:20-alpine' // 🚨 Node.js 런타임이 있는 이미지를 빌드 환경으로 사용
-            args '-u root' // Docker socket 권한 문제 방지 (필요 시 추가)
+            args '-v /var/run/docker.sock:/var/run/docker.sock'
         }
 
     }
